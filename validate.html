@@ -1,10 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Validate US Phone Number</title>
+	<title>Phone Number Validator</title>
+	<style>
+	
+		.container {
+			border: solid red 1px;
+			position: absolute;
+			width: 90%;
+			top: 10%;
+			left: 5%;
+			text-align: center;
+		}
+		.container > h1 {
+			font-size: 3em;
+		}
+		.container > p{
+			font-size: 1.3em;
+		}
+		.number{
+			margin: 20px auto 20px auto;
+			height: 1.8em;
+			width: 80%;
+			max-width: 500px;
+			font-size: 2em;
+		}
+		.buttons{
+			font-size: 1em;
+			width: 10em;
+			height: 3em;
+			margin: 1em;
+		}
+		.rules{
+			box-shadow: 1px 1px 10px #7A7B5F;
+			background: hsl(0, 0%, 80%);	
+			padding: 1em;
+			margin: 2em 20% 2em 20%;
+			
+		}
+		.rules > ul {
+		    display: inline-block;
+		    font-size: 1.3em;
+		    line-height: 1.4em;
+		}
+		.rules > p{
+			font-size: 1.5em;
+		}
+		.status{
+			margin: auto 1em auto 1em;
+		}
+		.valid{
+			color: green;
+		}
+		.invalid{
+			color: red;
+		}
+	</style>
 </head>
 <body>
 
+<div class='container'>
+	<h1>Enter a valid US phone number:</h1>
+	<input type="text" class="number">
+	<br>
+	<input class="buttons" type="submit" value="Reset" onclick="reset()">
+	<input class="buttons" type="submit" value="Submit" onclick="checkNumber()">
+	<div class="rules">
+		<p>The following are examples of valid formats for US numbers:</p>
+		<ul>
+			<li>555-555-5555</li>
+			<li>(555)555-5555</li>
+			<li>(555) 555-5555</li>
+			<li>555 555 5555</li>
+			<li>5555555555</li>
+			<li>1 555 555 5555</li>
+		</ul>
+	</div>
+	<p> &copy; 2019 by Joe Liang. Check out my <a href="https://1000mileworld.com/portfolio/">portfolio</a> or blog at <a href="https://1000mileworld.com">1000 Mile World</a>.</p>
+</div>
 
+<script>
+	const input = document.querySelector('.number');
+	function reset(){
+		input.value = '';
+		toggleResult();
+	}
+	function checkNumber(){
+		toggleResult();
+
+		let display = document.createElement('p');
+		display.setAttribute('id','result');
+		display.classList.add('status');
+		input.after(display);
+
+
+		const regex = /^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$/;
+
+
+  		if(regex.test(input.value)){
+  			display.textContent = '\u2714 Good job, you entered a valid US phone number!';
+  			display.classList.add('valid');
+  		}else{
+  			display.textContent = '\u274c Sorry, the phone number you entered is not a valid US number.';
+  			display.classList.add('invalid');
+  		}
+
+	}
+	function toggleResult(){
+		let element = document.getElementById('result');
+		if(element!=null){
+			element.parentNode.removeChild(element);
+		}
+	}
+
+</script>
 </body>
 </html>
