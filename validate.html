@@ -15,13 +15,10 @@
 			top: 10%;
 			left: 5%;
 			text-align: center;
-			border: solid red 1px;
 		}
 		.container > h1 {
-			font-size: 3em;
-		}
-		.container > p{
-			font-size: 1.3em;
+			font-size: 4em;
+			text-shadow: 4px 4px 10px white;
 		}
 		.number{
 			margin: 20px auto 20px auto;
@@ -29,19 +26,25 @@
 			width: 80%;
 			max-width: 500px;
 			font-size: 2em;
+			border: solid 5px black;
 		}
 		.buttons{
 			font-size: 1em;
+			font-weight: 700;
 			width: 10em;
 			height: 3em;
 			margin: 1em;
+		    background-image: linear-gradient(to bottom right, hsl(0, 0%, 50%) , hsl(0, 0%, 80%));
+		}
+		.buttons:hover{
+			transform: scale(1.1);
+			cursor: pointer;
 		}
 		.rules{
 			box-shadow: 1px 1px 10px #7A7B5F;
 			background: hsl(0, 0%, 80%);	
 			padding: 1em;
 			margin: 2em 20% 2em 20%;
-			
 		}
 		.rules > ul {
 		    display: inline-block;
@@ -52,7 +55,11 @@
 			font-size: 1.5em;
 		}
 		.status{
-			margin: auto 1em auto 1em;
+			margin: 1em auto;
+			font-size: 1.3em;
+			background-color: yellow;
+			width: 50%;
+			max-width: 650px;
 		}
 		.valid{
 			color: green;
@@ -62,11 +69,12 @@
 		}
 		.footer{
 			font-weight: 800;
-			background-color: white;
+			background-color: hsl(0, 0%, 90%);
 			width: 50%;
 			max-width: 700px;
 			margin: 0 auto;
 			font-size: 1.2em;
+			padding: 10px;
 		}
 	</style>
 </head>
@@ -74,7 +82,7 @@
 
 <div class='container'>
 	<h1>Enter a valid US phone number:</h1>
-	<input type="text" class="number">
+	<input type="text" class="number" placeholder="Enter phone number">
 	<br>
 	<input class="buttons" type="submit" value="Reset" onclick="reset()">
 	<input class="buttons" type="submit" value="Submit" onclick="checkNumber()">
@@ -101,7 +109,7 @@
 	function checkNumber(){
 		toggleResult();
 
-		let display = document.createElement('p');
+		let display = document.createElement('div');
 		display.setAttribute('id','result');
 		display.classList.add('status');
 		input.after(display);
@@ -111,10 +119,10 @@
 
 
   		if(regex.test(input.value)){
-  			display.textContent = '\u2714 Good job, you entered a valid US phone number!';
+  			display.innerHTML = '\u2714 Good job, you entered a valid US phone number!';
   			display.classList.add('valid');
   		}else{
-  			display.textContent = '\u274c Sorry, the phone number you entered is not a valid US number.';
+  			display.innerHTML = '\u274c Sorry, the phone number you entered is not a valid US number.';
   			display.classList.add('invalid');
   		}
 
