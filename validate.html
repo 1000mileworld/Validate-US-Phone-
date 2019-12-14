@@ -19,6 +19,7 @@
 		.container > h1 {
 			font-size: 4em;
 			text-shadow: 4px 4px 10px white;
+			font-weight: 900;
 		}
 		.number{
 			margin: 20px auto 20px auto;
@@ -60,6 +61,7 @@
 			background-color: yellow;
 			width: 50%;
 			max-width: 650px;
+			padding: 0.5em;
 		}
 		.valid{
 			color: green;
@@ -133,6 +135,14 @@
 			element.parentNode.removeChild(element);
 		}
 	}
+
+	//allows for enter key to be used to submit
+	input.addEventListener('keydown', e =>{
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 13) { //Enter keycode
+		 	checkNumber();
+		}
+	})
 
 </script>
 </body>
